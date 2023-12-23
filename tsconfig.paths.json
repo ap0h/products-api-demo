@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "baseUrl": ".",
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@core/*": ["src/core/*"],
+      "@libs/*": ["src/libs/*"],
+      "@repositories/*": ["src/repositories/*"],
+      "@use-cases/*": ["src/use-cases/*"],
+    }
+  }
+}

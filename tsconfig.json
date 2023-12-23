@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "lib": [
+      "ESNext"
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "lib",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "target": "es2020",
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts"
+, "src/libs/csv/process.ts"  ],
+  "exclude": [
+    "node_modules/**/*",
+    ".vscode/**/*"
+  ],
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  }
+}
