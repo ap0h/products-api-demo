@@ -7,5 +7,11 @@ const ProductSchema = new Schema<Product>({
     producerId: { type: String, required: true, ref: 'Producer' },
 }, { timestamps: false,  });
 
+ProductSchema.virtual('producer', {
+    ref: 'Producer',
+    localField: 'producerId',
+    foreignField: '_id',
+    justOne: true
+});
 
 export const ProductModel = model<Product>('Product', ProductSchema);

@@ -1,7 +1,8 @@
 import { bulkCreateFromCsv } from "@repositories/product-repository/bulk-create-from-csv";
+import type { ImportProductsFromCsv } from "./interfaces";
 
 interface ImportProductsFromCsvDependencies {
-    processCsvFile: (urlOfCsvFile: string) => Promise<void>
+    processCsvFile: ImportProductsFromCsv
 }
 
 export const importProductsFromCsvFactory =  
