@@ -3,19 +3,19 @@ import type { GetProductByField } from "./interfaces"
 import * as  productRepository  from "@repositories/product-repository"
 
 interface GetProductByProducerDependencies {
-    getProductByProducer: GetProductByField
+    getProductByField: GetProductByField
 }
 
 
 export type GetProductByProducerFactory = (dependencies: GetProductByProducerDependencies) => (producerId: string) => Promise<Product>
 
 export const getProductByProducerFactory: GetProductByProducerFactory = ({
-    getProductByProducer
+    getProductByField
 }) => async (producerId) => {
-    const product = await getProductByProducer('producerId', producerId)
+    const product = await getProductByField('producerId', producerId)
     return product
 }
 
 export const getProductByProducer = getProductByProducerFactory({
-    getProductByProducer: productRepository.getProductByField
+    getProductByField: productRepository.getProductByField
 })
