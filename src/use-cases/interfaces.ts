@@ -1,10 +1,12 @@
+import { Producer } from "@core/producer/types";
 import type { Product } from "@core/product/types";
 
 export type GetProduct = (id: string) => Promise<Product>
 
 export type GetProductByField = <T extends keyof Omit<Product, 'producer' | '_id'>>(field: T, value: Product[T]) => Promise<Product>
 
-export type CreateProducts = (products: Omit<Product, '_id'>[]) => Promise<string[]>
+type ProductInput = Omit<Product, '_id' | 'producer' | 'producerId'> & { producer: Omit<Producer, '_id'> };
+export type CreateProductsWithProducer =  (products: ProductInput[]) => Promise<Product[]>
 
 export type UpdateProduct = (id: string, updatedProduct: Partial<Omit<Product, '_id'>>) => Promise<Product>
 

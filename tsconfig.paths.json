@@ -8,6 +8,7 @@
       "@libs/*": ["src/libs/*"],
       "@repositories/*": ["src/repositories/*"],
       "@use-cases/*": ["src/use-cases/*"],
+      "@services/*": ["src/services/*"]
     }
   }
 }

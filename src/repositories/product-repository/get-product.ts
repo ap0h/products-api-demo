@@ -10,7 +10,7 @@ export const getProduct: GetProduct = async (id) => {
         const product = await ProductModel.findById(id).populate('producer').lean()
 
         if(!product) {
-            throw new NotFoundError(`Product with id '${id}' not found`, 'PRODUCT_NOT_FOUND')
+            throw new NotFoundError(`Product with id '${id.toString()}' not found`, 'PRODUCT_NOT_FOUND')
         }
 
         return product

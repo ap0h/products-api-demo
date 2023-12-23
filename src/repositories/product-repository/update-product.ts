@@ -9,7 +9,7 @@ export const updateProduct: UpdateProduct = async (id, updatedProduct) => {
     try {
         const product = await ProductModel.findByIdAndUpdate(id, updatedProduct, {lean: true, populate: 'producer'});
         if (!product) {
-            throw new NotFoundError(`Product with id ${id} not found`, 'PRODUCT_NOT_FOUND_DURING_UPDATE');
+            throw new NotFoundError(`Product with id ${id.toString()} not found`, 'PRODUCT_NOT_FOUND_DURING_UPDATE');
         }
         
         return product;

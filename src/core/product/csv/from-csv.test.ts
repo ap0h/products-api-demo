@@ -9,6 +9,7 @@ describe("fromCsv", () => {
             producer: {
                 name: csvProductData["Product Name"],
                 country: csvProductData.Country,
+                region: csvProductData.Region,
             },         
         };
 

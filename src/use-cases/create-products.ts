@@ -1,19 +1,23 @@
 import { Product } from "@core/product/types"
-import type { CreateProducts } from "./interfaces"
-import * as productRepository from "@repositories/product-repository"
-
+import { Producer } from "@core/producer/types"
+import { createProductsWithProducer } from "@services/product-service";
+import { CreateProductsWithProducer } from "./interfaces";
 interface CreateProductsDependencies {
-    createProducts: CreateProducts
+    createProductsWithProducer: CreateProductsWithProducer
 }
+
+type ProductInput = Omit<Product, '_id' | 'producer' | 'producerId'> & { producer: Omit<Producer, '_id'> };
 
 export type CreateProductsFactory = 
     (dependencies:CreateProductsDependencies ) => 
-    (products: Omit<Product, '_id'>[]) => Promise<string[]>
+    (products: ProductInput[]) => Promise<Product[]>
 
-export const createProductsFactory: CreateProductsFactory = ({createProducts}) => async (products) => {
-    return createProducts(products)
+export const createProductsFactory: CreateProductsFactory = ({ 
+    createProductsWithProducer
+ }) => async (products) => {
+    return createProductsWithProducer(products)
 }
 
 export const createProducts = createProductsFactory({
-    createProducts: productRepository.createProducts
+    createProductsWithProducer
 })
