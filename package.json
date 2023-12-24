@@ -6,7 +6,8 @@
   "scripts": {
     "build": "swc ./src -d ./dist --source-maps",
     "start": "yarn build && node ./dist/index.js",
-    "dev": "dotenv -e ./.env -- nodemon ./dist/index.js",
+    "dev:local": "dotenv -e ./.env -- nodemon ./dist/index.js",
+    "dev":"docker-compose up",
     "test:unit": "jest --detectOpenHandles --forceExit --coverage",
     "typecheck": "tsc --noEmit",
     "format": "xo --fix"
@@ -18,7 +19,7 @@
     "watch": ["src"],
     "ignore": ["*.test.ts", "**/fixtures/**"],
     "ext": ".ts,.json,.js",
-    "exec": "yarn start"
+    "exec": "yarn build && node ./dist/index.js"
   },
   "xo": {
     "prettier": true,
