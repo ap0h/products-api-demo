@@ -1,21 +1,19 @@
 import type { Product } from "@core/product/types"
-import type { GetProductByField } from "./interfaces"
+import type { GetProductsByProducer } from "./interfaces"
 import * as  productRepository  from "@repositories/product-repository"
 
 interface GetProductByProducerDependencies {
-    getProductByField: GetProductByField
+    getProductsByProducer: GetProductsByProducer
 }
 
-
-export type GetProductByProducerFactory = (dependencies: GetProductByProducerDependencies) => (producerId: string) => Promise<Product>
+export type GetProductByProducerFactory = (dependencies: GetProductByProducerDependencies) => (producerId: string) => Promise<Product[]>
 
 export const getProductByProducerFactory: GetProductByProducerFactory = ({
-    getProductByField
+    getProductsByProducer
 }) => async (producerId) => {
-    const product = await getProductByField('producerId', producerId)
-    return product
+    return getProductsByProducer({producerId})
 }
 
-export const getProductByProducer = getProductByProducerFactory({
-    getProductByField: productRepository.getProductByField
+export const getProductsByProducer = getProductByProducerFactory({
+    getProductsByProducer: productRepository.findProducts
 })

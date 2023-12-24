@@ -11,9 +11,7 @@ interface UpdateProductInput {
 export type UpdateProductFactory = (dependencies: UpdateProductDependencies) => (input: UpdateProductInput) => Promise<Product>;
 
 export const updateProductFactory:UpdateProductFactory = ({updateProduct}) => async ({id, updateBody}) => {
-    const updatedProduct = await updateProduct(id, updateBody)
-    console.log(updatedProduct, '🚀 - updated')
-    return updatedProduct
+    return updateProduct(id, updateBody)
 }
 
 export const updateProduct = updateProductFactory({

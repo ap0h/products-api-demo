@@ -7,7 +7,8 @@ export type UpdateProduct = (id: string, updatedProduct: Partial<Omit<Product, '
 
 export const updateProduct: UpdateProduct = async (id, updatedProduct) => {
     try {
-        const product = await ProductModel.findByIdAndUpdate(id, updatedProduct, {lean: true, populate: 'producer'});
+        const product = await ProductModel.findByIdAndUpdate(id, updatedProduct, {lean: true, new: true});
+        
         if (!product) {
             throw new NotFoundError(`Product with id ${id.toString()} not found`, 'PRODUCT_NOT_FOUND_DURING_UPDATE');
         }
