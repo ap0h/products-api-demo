@@ -4,12 +4,7 @@ import {
 	GraphQLString,
 	type ThunkObjMap,
 } from 'graphql'
-import {
-	type GetProductByProducerFactory,
-	getProductsByProducer,
-} from '@use-cases/get-product-by-producer'
-import {ProductModel} from '@libs/models'
-import {getProduct} from '@repositories/product-repository'
+import {type GetProductByProducerFactory} from '@use-cases/get-product-by-producer'
 import {type GetProductFactory} from '@use-cases/get-product'
 import {ProductByProducer, ProductType} from './types'
 
