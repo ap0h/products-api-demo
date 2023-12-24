@@ -3,6 +3,7 @@ import {
 	GraphQLString,
 	GraphQLList,
 	GraphQLNonNull,
+	GraphQLBoolean,
 } from 'graphql'
 import {getProduct} from '@use-cases/get-product'
 import {createProducts} from '@use-cases/create-products'
@@ -12,6 +13,7 @@ import {updateProduct} from '@use-cases/update-product'
 import {deleteProducts} from '@use-cases/delete-products'
 import {type ProductInput} from '@use-cases/interfaces'
 import {type Product} from '@core/product/types'
+import {importProductsFromCsv} from '@use-cases/import-products-from-csv'
 import {
 	CreateProductInputType,
 	ProductOutputType,
@@ -53,6 +55,15 @@ const RootMutationType = new GraphQLObjectType({
 	name: 'Mutation',
 	description: 'Root Mutation',
 	fields: {
+		importProducts: {
+			type: GraphQLBoolean,
+			args: {
+				url: {type: new GraphQLNonNull(GraphQLString)},
+			},
+			async resolve(_, {url}: {url: string}) {
+				return importProductsFromCsv(url)
+			},
+		},
 		createProducts: {
 			type: new GraphQLList(ProductOutputType),
 			args: {

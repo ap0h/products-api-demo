@@ -28,7 +28,6 @@ const ProductType = new GraphQLObjectType({
 		producer: {
 			type: ProducerType,
 			async resolve(parent: Product) {
-				console.log('PRODUCT-PRODUCER-RESOLVER')
 				return getProducer(parent.producerId)
 			},
 		},
@@ -126,6 +125,17 @@ const DeleteProductsOutputType = new GraphQLObjectType({
 	}),
 })
 
+const ImportProductsFromCsvInputType = new GraphQLInputObjectType({
+	name: 'ImportProductsFromCsvInput',
+	description: 'This represents the input to import products from a CSV file',
+	fields: () => ({
+		urlOfCsvFile: {
+			type: GraphQLString,
+			description: 'URL of the CSV file',
+		},
+	}),
+})
+
 export {
 	ProductType,
 	ProductByProducer,
@@ -134,4 +144,5 @@ export {
 	UpdateProductInputType,
 	DeleteProductsInputType,
 	DeleteProductsOutputType,
+	ImportProductsFromCsvInputType,
 }
