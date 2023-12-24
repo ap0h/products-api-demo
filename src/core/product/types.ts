@@ -1,9 +1,9 @@
-import { Producer } from "@core/producer/types"
+import {type Producer} from '@core/producer/types'
 
-export type Product = {
-    _id: string
-    vintage: string
-    name: string
-    producerId: string
-    producer?: Producer
+export interface Product {
+	_id: string
+	vintage: string
+	name: string
+	producerId: string
+	producer?: Producer
 }
