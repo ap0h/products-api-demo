@@ -5,9 +5,15 @@ interface ImportProductsFromCsvDependencies {
 	processCsvFile: ImportProductsFromCsv
 }
 
-export const importProductsFromCsvFactory =
-	({processCsvFile}: ImportProductsFromCsvDependencies) =>
-	async (urlOfCsvFile: string): Promise<boolean> => {
+export type ImportProductsFromCsvFactory = ({
+	processCsvFile,
+}: ImportProductsFromCsvDependencies) => (
+	urlOfCsvFile: string,
+) => Promise<boolean>
+
+export const importProductsFromCsvFactory: ImportProductsFromCsvFactory =
+	({processCsvFile}) =>
+	async (urlOfCsvFile): Promise<boolean> => {
 		void processCsvFile(urlOfCsvFile)
 		return true
 	}
