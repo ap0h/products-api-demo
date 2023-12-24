@@ -7,7 +7,7 @@ export type GetProduct = (id: string) => Promise<Product>
 
 export const getProduct: GetProduct = async (id) => {
     try {
-        const product = await ProductModel.findById(id).populate('producer').lean()
+        const product = await ProductModel.findById(id).lean()
 
         if(!product) {
             throw new NotFoundError(`Product with id '${id.toString()}' not found`, 'PRODUCT_NOT_FOUND')

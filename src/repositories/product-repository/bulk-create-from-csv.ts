@@ -6,7 +6,7 @@ import { Product } from "@core/product/types";
 import {processCsvFromStream, type BatchItem} from "@libs/csv/batch-csv-processor";
 import { ProductModel } from "@libs/models";
 
-const upsertBatch = async (item: BatchItem<Product>[]) => {
+const upsertBatch = async (item: BatchItem<Omit<Product, '_id' | 'producerId'>>[]) => {
     const products = item.map((i) => i.data);
     const keys = item.map((i) => i.key);
     await ProductModel.bulkWrite(
@@ -26,7 +26,7 @@ export const bulkCreateFromCsv = async (csvUrl: string, batchSize = 100): Promis
   try {
     const response = await axios.get(csvUrl, { responseType: 'stream' });
 
-    await processCsvFromStream(response.data, (item: CsvProduct)=> {
+    await processCsvFromStream<CsvProduct, Omit<Product, '_id' | 'producerId'>>(response.data, (item: CsvProduct)=> {
         const product = fromCsv(item);
         const key = `${product.vintage}-${product.name}-${product.producer?.name}`;
         return { key, data: product };

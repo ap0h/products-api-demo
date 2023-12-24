@@ -7,7 +7,7 @@ export type GetProducer = (id: string) => Promise<Product>
 
 export const getProducer: GetProducer = async (id) => {
     try {
-        const producer = await ProducerModel.findById(id, null, {populate: 'producer'})
+        const producer = await ProducerModel.findById(id)
 
         if(!producer) {
             throw new NotFoundError(`Producer with id '${id.toString()}' not found`, 'PRODUCER_NOT_FOUND')

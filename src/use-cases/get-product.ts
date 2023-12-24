@@ -9,8 +9,7 @@ interface GetProductDependencies {
 export type GetProductFactory = (dependencies: GetProductDependencies) => (id: string) => Promise<Product>
 
 export const getProductFactory: GetProductFactory = ({getProduct}) => async (id) => {
-    const product = await getProduct(id)
-    return product
+    return getProduct(id)
 }
 
 
