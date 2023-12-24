@@ -10,20 +10,13 @@ import {
 	processCsvFromStream,
 } from '@libs/csv/batch-csv-processor'
 
-const upsertBatch = async (
-	items: Array<
-		BatchItem<
-			Omit<Product, '_id' | 'producerId' | 'producer'> & {
-				producer: Omit<Producer, '_id'>
-			}
-		>
-	>,
-) => {
+type ProcessedProduct = Omit<Product, '_id' | 'producerId' | 'producer'> & {
+	producer: Omit<Producer, '_id'>
+}
+const upsertBatch = async (items: Array<BatchItem<ProcessedProduct>>) => {
 	const products = items.map((i) => i.data)
 	await createProductsWithProducer(products)
 }
-
-export const url = 'https://api.frw.co.uk/feeds/all_listings.csv'
 
 export const bulkCreateFromCsv = async (
 	csvUrl: string,
@@ -34,12 +27,7 @@ export const bulkCreateFromCsv = async (
 			responseType: 'stream',
 		})
 
-		await processCsvFromStream<
-			CsvProduct,
-			Omit<Product, '_id' | 'producerId' | 'producer'> & {
-				producer: Omit<Producer, '_id'>
-			}
-		>(
+		await processCsvFromStream<CsvProduct, ProcessedProduct>(
 			response.data,
 			(item: CsvProduct) => {
 				const product = fromCsv(item)
