@@ -1,1 +1,3 @@
-import './server' // eslint-disable-line import/no-unassigned-import
+import {run} from './infrastructure/server'
+
+run()

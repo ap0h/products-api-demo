@@ -4,16 +4,17 @@ import {
 	GraphQLList,
 	GraphQLNonNull,
 	GraphQLBoolean,
+	GraphQLSchema,
 } from 'graphql'
-import {getProduct} from '@use-cases/get-product'
 import {createProducts} from '@use-cases/create-products'
-import {ProductModel} from '@libs/models'
-import {getProductsByProducer} from '@use-cases/get-product-by-producer'
-import {updateProduct} from '@use-cases/update-product'
 import {deleteProducts} from '@use-cases/delete-products'
-import {type ProductInput} from '@use-cases/interfaces'
-import {type Product} from '@core/product/types'
+import {getProduct} from '@use-cases/get-product'
+import {getProductsByProducer} from '@use-cases/get-product-by-producer'
 import {importProductsFromCsv} from '@use-cases/import-products-from-csv'
+import {ProductModel} from '@libs/models'
+import {type Product} from '@core/product/types'
+import {type ProductInput} from '@use-cases/interfaces'
+import {updateProduct} from '@use-cases/update-product'
 import {
 	CreateProductInputType,
 	ProductOutputType,
@@ -104,4 +105,9 @@ const RootMutationType = new GraphQLObjectType({
 	},
 })
 
-export {RootQueryType, RootMutationType}
+const schema = new GraphQLSchema({
+	query: RootQueryType,
+	mutation: RootMutationType,
+})
+
+export default schema
