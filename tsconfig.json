@@ -19,13 +19,15 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts"
-, "src/libs/csv/process.ts"  ],
+    "src/**/*.ts", "src/libs/csv/process.ts" 
+  ],
   "exclude": [
     "node_modules/**/*",
-    ".vscode/**/*"
+    ".vscode/**/*",
+    "dist"
   ],
   "ts-node": {
+    "swc": true,
     "require": [
       "tsconfig-paths/register"
     ]
