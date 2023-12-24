@@ -20,8 +20,8 @@ services:
     command: sh -c "yarn && yarn dev:local"
     ports:
       - 3000:3000
-    env_file:
-      - .env
-
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/fine-db
+      - PORT=3000
 volumes:
   mongodb_data:
