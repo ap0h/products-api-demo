@@ -2,6 +2,11 @@
 
 The **Products API** service facilitates the management of products, offering a range of operations such as creation, updating, retrieval, and deletion of products. Additionally, it supports the importation of products from a CSV file that can be uploaded from an external source.
 
+## How to run
+
+Simply run `yarn dev` docker will do the rest.
+
+
 ## Development
 
 The project is authored in TypeScript and employs MongoDB and GraphQL via Express. It incorporates various tools to enhance the development process, including:
@@ -23,3 +28,4 @@ The project is authored in TypeScript and employs MongoDB and GraphQL via Expres
 - **@use-cases:** Application use cases
 
 This setup ensures a structured and efficient development environment for managing and enhancing the products API.
+
